@@ -38,18 +38,21 @@ func init() {
 	message.DefaultCatalog = cat
 }
 
-var messageKeyToIndex = map[string]int{}
+var messageKeyToIndex = map[string]int{
+	"凭证生成失败": 0,
+	"成功":     1,
+}
 
-var en_USIndex = []uint32{ // 1 elements
-	0x00000000,
-} // Size: 28 bytes
+var en_USIndex = []uint32{ // 3 elements
+	0x00000000, 0x0000001d, 0x00000025,
+} // Size: 36 bytes
 
-const en_USData string = ""
+const en_USData string = "\x02Credential generation failed\x02success"
 
-var zh_CNIndex = []uint32{ // 1 elements
-	0x00000000,
-} // Size: 28 bytes
+var zh_CNIndex = []uint32{ // 3 elements
+	0x00000000, 0x00000013, 0x0000001a,
+} // Size: 36 bytes
 
-const zh_CNData string = ""
+const zh_CNData string = "\x02凭证生成失败\x02成功"
 
-// Total table size 56 bytes (0KiB); checksum: 32CC3CAD
+// Total table size 135 bytes (0KiB); checksum: F08795AF

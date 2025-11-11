@@ -1,12 +1,17 @@
-package translations
+package translater
 
 import (
 	"slices"
 	"strings"
 
+	_ "insulation/internal/translations"
+
 	"github.com/gin-gonic/gin"
 	"golang.org/x/text/language"
 )
+
+func init() {
+}
 
 var langSupport = []string{`zh_CN`, `en_US`}
 
@@ -22,7 +27,7 @@ func Translater(lang string) language.Tag {
 	}
 }
 
-// 从http头Accept-Language或get参数lang获取地区码
+// 从http头Accept-Language或get参数lang获取地区码,并且格式化地区码为zh_CN的形式
 func TranslaterFromContext(ctx *gin.Context) (language.Tag, string) {
 	lang := ctx.GetHeader(`Accept-Language`)
 	if lang == "" {

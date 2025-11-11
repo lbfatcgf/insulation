@@ -1,0 +1,16 @@
+{
+    "language": "zh-CN",
+    "messages": [
+        {
+            "id": "凭证生成失败",
+            "message": "凭证生成失败",
+            "translation": "凭证生成失败"
+
+        },
+        {
+            "id": "成功",
+            "message": "成功",
+            "translation": "成功"
+        }
+    ]
+}

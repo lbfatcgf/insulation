@@ -1,0 +1,15 @@
+{
+    "language": "en-US",
+    "messages": [
+        {
+            "id": "凭证生成失败",
+            "message": "凭证生成失败",
+            "translation": "Credential generation failed"
+        },
+        {
+            "id": "成功",
+            "message": "成功",
+            "translation": "success"
+        }
+    ]
+}
