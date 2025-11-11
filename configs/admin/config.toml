@@ -1,0 +1,25 @@
+[web]
+port = "8080"
+
+mode = "debug"
+
+[log]
+level = "info"
+path = "/var/log/app.log"
+
+[dataSource]
+[dataSource.dataBase]
+dsn = "user:password@tcp(localhost:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
+
+[dataSource.redis]
+dsn = "localhost:6379"
+[jwt_option]
+type = "ecdsa"
+
+# 密钥 type="" 生效
+secret = "secret" 
+
+# 密钥 type="ecdsa"|"rsa" 才生效
+pri_key_path = "C:/Users/lbfatcgf/work/code/temp/rsaKey/es256.pri"
+pub_key_path = "C:/Users/lbfatcgf/work/code/temp/rsaKey/es256.pub"
+expire_duration = "24h"
