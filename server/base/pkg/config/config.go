@@ -1,6 +1,8 @@
 package config
 
 import (
+	"fmt"
+
 	jwtutil "insulation/server/base/pkg/jwt_util"
 
 	"github.com/spf13/viper"
@@ -73,6 +75,7 @@ func Initialize(fPath, fName string) {
 }
 
 func IsDebug() bool {
+	fmt.Println(globalConfig.Mode == "debug")
 	return globalConfig.Mode == "debug"
 }
 

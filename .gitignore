@@ -33,3 +33,4 @@ go.work.sum
 build/output
 *.dev.toml
 vendor/
+.vscode/settings.json

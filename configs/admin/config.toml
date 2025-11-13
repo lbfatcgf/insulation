@@ -1,8 +1,9 @@
+# debug|release|test
+mode = "debug"
+
 [web]
 port = "8080"
 
-# debug|release|test
-mode = "debug"
 
 [log]
 level = "info"
@@ -13,7 +14,7 @@ path = "/var/log/app.log"
 dsn = "user:password@tcp(localhost:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 
 [dataSource.redis]
-dsn = "localhost:6379"
+dsn = "redis://user:password@localhost:6379"
 [jwt_option]
 type = "ecdsa"
 

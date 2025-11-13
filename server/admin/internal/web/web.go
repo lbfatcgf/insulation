@@ -5,11 +5,11 @@ import (
 	"insulation/server/admin/internal/routes"
 	"insulation/server/base/pkg/config"
 
-	_ "insulation/apis/admin"
+	// _ "insulation/apis/admin"
 
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	// swaggerFiles "github.com/swaggo/files"
+	// ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func Start(address string) {
@@ -20,7 +20,8 @@ func Start(address string) {
 		gin.SetMode(gin.DebugMode)
 	}
 	app := gin.Default()
-	app.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	// app.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	routes.NewLoginRoute(app)
+	defer routes.CloseLog()
 	app.Run(address)
 }

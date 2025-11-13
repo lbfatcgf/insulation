@@ -5,13 +5,20 @@ import (
 
 	"insulation/server/admin/internal/auth"
 	ajaxres "insulation/server/base/pkg/ajax_res"
+	"insulation/server/base/pkg/config"
+	"insulation/server/base/pkg/logger"
 	"insulation/server/base/pkg/translater"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/text/message"
 )
 
+var adminLog *logger.Logger
+
 func NewLoginRoute(engine *gin.Engine) {
+
+	adminLog = logger.NewLogger("login", config.IsDebug())
+
 	router := engine.Group("/auth")
 	router.POST("/login", login())
 
@@ -33,7 +40,7 @@ func login() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		langTag, lang := translater.TranslaterFromContext(ctx)
 		p := message.NewPrinter(langTag)
-
+		adminLog.Info(lang)
 		token, err := auth.GenerateToken(`{"name":"lbf"}`)
 		if err != nil {
 			ctx.AbortWithStatusJSON(http.StatusInternalServerError, ajaxres.Error(http.StatusInternalServerError, p.Sprintf("凭证生成失败")))
@@ -58,4 +65,8 @@ func text() gin.HandlerFunc {
 		u := auth.GetAdminUser(ctx)
 		ctx.JSON(http.StatusOK, ajaxres.Success(u, lang))
 	}
+}
+
+func CloseLog() {
+	adminLog.Close()
 }
