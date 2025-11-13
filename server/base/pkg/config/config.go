@@ -71,3 +71,15 @@ func Initialize(fPath, fName string) {
 	}
 	viperReader = v
 }
+
+func IsDebug() bool {
+	return globalConfig.Mode == "debug"
+}
+
+func IsRelease() bool {
+	return globalConfig.Mode == "release"
+}
+
+func IsTest() bool {
+	return globalConfig.Mode == "test"
+}

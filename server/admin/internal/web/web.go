@@ -1,36 +1,26 @@
 package web
 
 import (
-	"net/http"
-
 	"insulation/server/admin/internal/auth"
-	ajax_res "insulation/server/base/pkg/ajax_res"
-	"insulation/server/base/pkg/translater"
+	"insulation/server/admin/internal/routes"
+	"insulation/server/base/pkg/config"
+
+	_ "insulation/apis/admin"
 
 	"github.com/gin-gonic/gin"
-	"golang.org/x/text/message"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func Start(address string) {
 	auth.InitializeAuth()
+	if config.IsRelease() {
+		gin.SetMode(gin.ReleaseMode)
+	} else {
+		gin.SetMode(gin.DebugMode)
+	}
 	app := gin.Default()
-
-	app.POST("/login", func(ctx *gin.Context) {
-		langTag, lang := translater.TranslaterFromContext(ctx)
-		p := message.NewPrinter(langTag)
-
-		token, err := auth.GenerateToken(`{"name":"lbf"}`)
-		if err != nil {
-			ctx.AbortWithStatusJSON(500, ajax_res.Error(http.StatusForbidden, p.Sprintf("凭证生成失败")))
-			return
-		}
-		ctx.JSON(http.StatusOK, ajax_res.Success(token, lang))
-	})
-
-	app.POST(`/text`, auth.JWTAuthMiddleware(), func(ctx *gin.Context) {
-		_, lang := translater.TranslaterFromContext(ctx)
-		u := auth.GetAdminUser(ctx)
-		ctx.JSON(http.StatusOK, ajax_res.Success(u, lang))
-	})
+	app.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	routes.NewLoginRoute(app)
 	app.Run(address)
 }

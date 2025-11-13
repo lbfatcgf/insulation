@@ -6,7 +6,6 @@ import (
 	"insulation/server/admin/internal/web"
 	"insulation/server/base/pkg/args"
 	"insulation/server/base/pkg/config"
-	jsonp_pretty "insulation/server/base/pkg/json_pretty"
 )
 
 func Start() {
@@ -15,6 +14,6 @@ func Start() {
 	} else {
 		config.Initialize(*args.ConfigPath, *args.ConfigName)
 	}
-	fmt.Printf("%v\n", string(jsonp_pretty.Pretty(config.Global())))
+	// fmt.Printf("%v\n", string(jsonp_pretty.Pretty(config.Global())))
 	web.Start(fmt.Sprintf(`:%d`, config.Global().Web.Port))
 }

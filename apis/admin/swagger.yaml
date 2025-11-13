@@ -1,0 +1,80 @@
+definitions:
+  ajaxres.AjaxRes:
+    description: ajax返回结构体
+    properties:
+      code:
+        description: 状态码
+        example: 200
+        type: integer
+      data:
+        description: 返回数据
+      msg:
+        description: 返回信息
+        example: string
+        type: string
+    type: object
+info:
+  contact: {}
+  description: insulation后台api
+  title: insulation后台api
+  version: 1.0.0
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: 后台用户登录
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/ajaxres.AjaxRes'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "403":
+          description: Forbidden
+          schema:
+            allOf:
+            - $ref: '#/definitions/ajaxres.AjaxRes'
+            - properties:
+                data:
+                  type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/ajaxres.AjaxRes'
+            - properties:
+                data:
+                  type: object
+              type: object
+      summary: 后台用户登录
+      tags:
+      - 后台用户
+  /auth/text:
+    post:
+      consumes:
+      - application/json
+      description: 后台用户测试
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/ajaxres.AjaxRes'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 后台用户测试
+      tags:
+      - 后台用户
+swagger: "2.0"

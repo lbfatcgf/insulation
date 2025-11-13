@@ -6,10 +6,17 @@ import (
 	"golang.org/x/text/message"
 )
 
+// @Name			AjaxRes
+//
+// @Summary		ajax返回结构体
+// @Description	ajax返回结构体
 type AjaxRes struct {
-	Code int    `json:"code"`
-	Msg  string `json:"msg"`
-	Data any    `json:"data"`
+	// 状态码
+	Code int `json:"code" example:"200"`
+	// 返回信息
+	Msg string `json:"msg" example:"string"`
+	// 返回数据
+	Data any `json:"data"`
 }
 
 func Success(data any, lang string) AjaxRes {

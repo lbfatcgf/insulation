@@ -1,6 +1,7 @@
 [web]
 port = "8080"
 
+# debug|release|test
 mode = "debug"
 
 [log]

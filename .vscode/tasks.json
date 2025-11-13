@@ -4,12 +4,15 @@
         {
             "label": "build admin",
             "type": "shell",
-            "command": "go",
+            "command": "make",
             "args": [
-              "build","-o","${workspaceFolder}/build/output/admin.run"  ,"${workspaceFolder}/cmd/admin"
+                "build_admin"
             ],
             "group": "build",
-            "problemMatcher": []
+            "problemMatcher": ["$go"],
+            "presentation": {
+                "close": true
+            }
         }
     ]
 }
