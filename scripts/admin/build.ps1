@@ -8,7 +8,7 @@ if (-not (Get-Command swag  -ErrorAction SilentlyContinue)) {
 }
 swag fmt
 # Generate Swagger documentation
-swag init -g cmd\admin\main.go -o apis\admin
+swag init -g cmd\admin\main.go -o apis
 
 # Get current directory
 $dir = Get-Location
