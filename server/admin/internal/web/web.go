@@ -22,6 +22,6 @@ func Start(address string) {
 	app := gin.Default()
 	// app.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	routes.NewLoginRoute(app)
-	defer routes.CloseLog()
+
 	app.Run(address)
 }

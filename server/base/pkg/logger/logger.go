@@ -27,6 +27,12 @@ type Logger struct {
 	level    slog.Level
 }
 
+var logMap map[string]*Logger
+
+func init() {
+	logMap = make(map[string]*Logger)
+}
+
 func NewLogger(grouping string, logConsloe bool) *Logger {
 	logger := &Logger{
 		wirteCh: make(chan *logMsg, 1024),
@@ -40,6 +46,7 @@ func NewLogger(grouping string, logConsloe bool) *Logger {
 			Level: logger.level,
 		}))
 	}
+	logMap[grouping] = logger
 	go logger.start()
 	return logger
 }
@@ -151,5 +158,11 @@ func (l *Logger) start() {
 				l.log.Log(ctx, logMsg.Level, logMsg.Message, logMsg.arg...)
 			}
 		}
+	}
+}
+
+func CloseAllLog() {
+	for _, logger := range logMap {
+		logger.Close()
 	}
 }

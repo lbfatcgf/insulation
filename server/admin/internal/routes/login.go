@@ -6,6 +6,7 @@ import (
 	"insulation/server/admin/internal/auth"
 	ajaxres "insulation/server/base/pkg/ajax_res"
 	"insulation/server/base/pkg/config"
+	"insulation/server/base/pkg/limiter"
 	"insulation/server/base/pkg/logger"
 	"insulation/server/base/pkg/translater"
 
@@ -16,10 +17,10 @@ import (
 var adminLog *logger.Logger
 
 func NewLoginRoute(engine *gin.Engine) {
-
 	adminLog = logger.NewLogger("login", config.IsDebug())
 
 	router := engine.Group("/auth")
+	router.Use(limiter.RedisIpLimiter(1, 100))
 	router.POST("/login", login())
 
 	router.POST(`/text`, auth.JWTAuthMiddleware(), text())
@@ -61,12 +62,9 @@ func login() gin.HandlerFunc {
 //	@Router			/auth/text [post]
 func text() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		adminLog.Info(ctx.Request.RequestURI)
 		_, lang := translater.TranslaterFromContext(ctx)
 		u := auth.GetAdminUser(ctx)
 		ctx.JSON(http.StatusOK, ajaxres.Success(u, lang))
 	}
-}
-
-func CloseLog() {
-	adminLog.Close()
 }

@@ -16,6 +16,8 @@ dsn = "user:password@tcp(localhost:3306)/dbname?charset=utf8mb4&parseTime=True&l
 [dataSource.redis]
 dsn = "redis://user:password@localhost:6379"
 [jwt_option]
+
+# 密钥类型 ecdsa|rsa
 type = "ecdsa"
 
 # 密钥 type="" 生效
