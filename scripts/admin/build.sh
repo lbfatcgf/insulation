@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e -u
 
-tag=$0
+tag=$1
 if [ -z "${tag+x}" ]; then
     tag=dev
 elif [ "$tag" != "release" ]; then
