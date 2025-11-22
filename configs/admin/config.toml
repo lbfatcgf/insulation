@@ -2,6 +2,7 @@
 mode = "debug"
 
 [web]
+name = "insulation"
 port = "8080"
 
 
@@ -11,7 +12,8 @@ path = "/var/log/app.log"
 
 [dataSource]
 [dataSource.dataBase]
-dsn = "user:password@tcp(localhost:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
+dsn = "host=127.0.0.1 user=postgres password=123456 dbname=insulation port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+
 
 [dataSource.redis]
 dsn = "redis://user:password@localhost:6379"

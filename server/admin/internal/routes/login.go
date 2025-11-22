@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"insulation/server/admin/internal/auth"
-	ajaxres "insulation/server/base/pkg/ajax_res"
+	ajax_res "insulation/server/base/pkg/ajax_res"
 	"insulation/server/base/pkg/config"
 	"insulation/server/base/pkg/limiter"
 	"insulation/server/base/pkg/logger"
@@ -14,10 +14,10 @@ import (
 	"golang.org/x/text/message"
 )
 
-var adminLog *logger.Logger
+var log *logger.Logger
 
 func NewLoginRoute(engine *gin.Engine) {
-	adminLog = logger.NewLogger("login", config.IsDebug())
+	log = logger.NewLogger("login", config.IsDebug())
 
 	router := engine.Group("/auth")
 	router.Use(limiter.RedisIpLimiter(1, 100))
@@ -41,13 +41,13 @@ func login() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		langTag, lang := translater.TranslaterFromContext(ctx)
 		p := message.NewPrinter(langTag)
-		adminLog.Info(lang)
+		log.Info(lang)
 		token, err := auth.GenerateToken(`{"name":"lbf"}`)
 		if err != nil {
-			ctx.AbortWithStatusJSON(http.StatusInternalServerError, ajaxres.Error(http.StatusInternalServerError, p.Sprintf("凭证生成失败")))
+			ctx.AbortWithStatusJSON(http.StatusInternalServerError, ajax_res.Error(http.StatusInternalServerError, p.Sprintf("凭证生成失败")))
 			return
 		}
-		ctx.JSON(http.StatusOK, ajaxres.Success(token, lang))
+		ctx.JSON(http.StatusOK, ajax_res.Success(token, lang))
 	}
 }
 
@@ -62,9 +62,9 @@ func login() gin.HandlerFunc {
 //	@Router			/auth/text [post]
 func text() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		adminLog.Info(ctx.Request.RequestURI)
+		log.Info(ctx.Request.RequestURI)
 		_, lang := translater.TranslaterFromContext(ctx)
 		u := auth.GetAdminUser(ctx)
-		ctx.JSON(http.StatusOK, ajaxres.Success(u, lang))
+		ctx.JSON(http.StatusOK, ajax_res.Success(u, lang))
 	}
 }

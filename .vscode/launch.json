@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Launch file",
+            "name": "Launch admin",
             "type": "go",
             "request": "launch",
             "mode": "exec",
@@ -12,6 +12,22 @@
                 "${workspaceFolder}/configs/admin",
                 "--confName",
                 "config.dev"
+            ]
+        },
+        {
+            "name": "init_sys",
+            "type": "go",
+            "request": "launch",
+            "mode": "exec",
+            "program": "${workspaceFolder}/build/output/admin.run",
+            "preLaunchTask": "build admin",
+            "args": [
+                "--confPath",
+                "${workspaceFolder}/configs/admin",
+                "--confName",
+                "config.dev",
+                "--init",
+                "true"
             ]
         }
     ]

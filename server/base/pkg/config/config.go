@@ -20,7 +20,8 @@ var (
 
 type GlobalConfig struct {
 	Web struct {
-		Port int `mapstructure:"port" toml:"port"`
+		Port int    `mapstructure:"port" toml:"port"`
+		Name string `mapstructure:"name" toml:"name"`
 	} `mapstructure:"web" toml:"web"`
 	Mode string `mapstructure:"mode" toml:"mode"`
 	Log  struct {

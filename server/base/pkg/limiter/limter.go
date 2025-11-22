@@ -27,6 +27,7 @@ func StandaloneLimiter(seconds int, tokens int) gin.HandlerFunc {
 	if log == nil {
 		initLog()
 	}
+
 	r := rate.NewLimiter(rate.Every(time.Duration(seconds)*time.Second), tokens)
 
 	return func(c *gin.Context) {
@@ -52,6 +53,7 @@ func RedisLimiter(seconds int, tokens int) gin.HandlerFunc {
 	if log == nil {
 		initLog()
 	}
+
 	return func(ctx *gin.Context) {
 		p := ctx.FullPath()
 		var count int
@@ -99,6 +101,7 @@ func RedisIpLimiter(seconds int, tokens int) gin.HandlerFunc {
 	if log == nil {
 		initLog()
 	}
+
 	return func(ctx *gin.Context) {
 		ip := ctx.ClientIP()
 		p := ctx.FullPath()

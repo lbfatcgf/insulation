@@ -1,9 +1,10 @@
-package web
+package controller
 
 import (
 	"insulation/server/admin/internal/auth"
 	"insulation/server/admin/internal/routes"
 	"insulation/server/base/pkg/config"
+	"insulation/server/base/pkg/database"
 
 	// _ "insulation/apis/admin"
 
@@ -19,8 +20,10 @@ func Start(address string) {
 	} else {
 		gin.SetMode(gin.DebugMode)
 	}
+	database.Initialize()
+
 	app := gin.Default()
-	// app.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	routes.NewLoginRoute(app)
 
 	app.Run(address)
