@@ -2,16 +2,16 @@ package auth
 
 import (
 	"insulation/server/base/pkg/config"
-	jwtutil "insulation/server/base/pkg/jwt_util"
+	"insulation/server/base/pkg/jwt_util"
 
 	"github.com/gin-gonic/gin"
 )
 
-var jwt *jwtutil.AdminJwt
+var jwt *jwt_util.AdminJwt
 
 func InitializeAuth() {
 	opt := config.Global().JwtOptions
-	j := jwtutil.NewAdminJwt()
+	j := jwt_util.NewAdminJwt()
 	err := j.SetSecret(opt)
 	if err != nil {
 		panic(err)

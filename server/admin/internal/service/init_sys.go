@@ -3,7 +3,7 @@ package service
 import (
 	"insulation/server/admin/internal/repositorys/sys_user_rep"
 	"insulation/server/base/pkg/database"
-	hashutil "insulation/server/base/pkg/hash_util"
+	"insulation/server/base/pkg/hash_util"
 	"insulation/server/base/pkg/models"
 	"insulation/server/base/pkg/password"
 )
@@ -25,7 +25,7 @@ func InitSys() {
 }
 
 func createSuperAdmin() error {
-	psword, err := password.Gen(hashutil.Sm3String("admin123456"))
+	psword, err := password.Gen(hash_util.Sm3String("admin123456"))
 	if err != nil {
 		return err
 	}

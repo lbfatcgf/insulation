@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	jwtutil "insulation/server/base/pkg/jwt_util"
+	"insulation/server/base/pkg/jwt_util"
 
 	"github.com/spf13/viper"
 )
@@ -36,7 +36,7 @@ type GlobalConfig struct {
 			DSN string `mapstructure:"dsn" toml:"dsn"`
 		} `mapstructure:"redis" toml:"redis"`
 	} `mapstructure:"dataSource" toml:"dataSource"`
-	JwtOptions jwtutil.JwtOptions `mapstructure:"jwt_option" toml:"jwt_option"`
+	JwtOptions jwt_util.JwtOptions `mapstructure:"jwt_option" toml:"jwt_option"`
 }
 
 func CustomConfig() *viper.Viper {

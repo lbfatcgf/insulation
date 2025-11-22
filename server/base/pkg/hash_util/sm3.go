@@ -1,4 +1,4 @@
-package hashutil
+package hash_util
 
 import "github.com/tjfoc/gmsm/sm3"
 

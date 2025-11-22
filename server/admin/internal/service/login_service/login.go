@@ -1,1 +1,1 @@
-package loginservice
+package login_service
